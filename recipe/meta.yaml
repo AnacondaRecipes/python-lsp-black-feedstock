@@ -30,6 +30,10 @@ test:
   imports:
     - pylsp_black
     - pylsp_black.plugin
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/python-lsp/python-lsp-black
@@ -38,6 +42,7 @@ about:
   license_file: LICENSE
   summary: Black plugin for the Python LSP Server
   dev_url: https://github.com/python-lsp/python-lsp-black
+  doc_url: https://github.com/python-lsp/python-lsp-black/blob/master/README.md
 
 extra:
   recipe-maintainers:
