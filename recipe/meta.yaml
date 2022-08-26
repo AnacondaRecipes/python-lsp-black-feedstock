@@ -1,5 +1,5 @@
 {% set name = "python-lsp-black" %}
-{% set version = "1.0.0" %}
+{% set version = "1.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -11,17 +11,19 @@ source:
 
 build:
   number: 0
-  noarch: python
+  skip: True  # [py<37]
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - setuptools
+    - wheel
   run:
-    - python >=3.6
-    - black
-    - python-lsp-server
+    - python
+    - black >=22.3.0
+    - python-lsp-server >=1.4.0
     - toml
 
 test:
@@ -34,7 +36,7 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: 'Black plugin for the Python LSP Server'
+  summary: Black plugin for the Python LSP Server
   dev_url: https://github.com/python-lsp/python-lsp-black
 
 extra:
