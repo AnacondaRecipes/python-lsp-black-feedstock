@@ -34,7 +34,7 @@ test:
     - pip
   commands:
     - pip check || true    # [not win]
-    - pip check || exit 1  # [win]
+    - pip check || exit /b  # [win]
 
 about:
   home: https://github.com/python-lsp/python-lsp-black
