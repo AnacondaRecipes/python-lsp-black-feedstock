@@ -1,5 +1,5 @@
 {% set name = "python-lsp-black" %}
-{% set version = "1.2.1" %}
+{% set version = "2.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d7eaeab2a377e96a82cc26afe2f8f2e1cf7c6eaefdcdeab026343e2e559dcce9
+  sha256: 8286d2d310c566844b3c116b824ada6fccfa6ba228b1a09a0526b74c04e0805f
 
 build:
   number: 0
-  skip: True  # [py<37]
-  script: "{{ PYTHON }} -m pip install . -vv"
+  skip: True  # [py<38 or py>311]
+  script: {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
 
 requirements:
   host:
@@ -22,9 +22,9 @@ requirements:
     - wheel
   run:
     - python
-    - black >=22.3.0
+    - black >=23.11.0
     - python-lsp-server >=1.4.0
-    - toml
+    - toml  # [py<311]
 
 test:
   imports:
@@ -33,7 +33,8 @@ test:
   requires:
     - pip
   commands:
-    - pip check || true    # [not win]
+    - pip check || true    # [win]
+    - pip check
 
 about:
   home: https://github.com/python-lsp/python-lsp-black
@@ -41,6 +42,9 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: Black plugin for the Python LSP Server
+  description: |
+    python-lsp-server plugin that adds support to black autoformatter,
+    forked from https://github.com/rupert/pyls-black/
   dev_url: https://github.com/python-lsp/python-lsp-black
   doc_url: https://github.com/python-lsp/python-lsp-black/blob/master/README.md
 
