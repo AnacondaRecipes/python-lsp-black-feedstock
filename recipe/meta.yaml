@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<38 or py>311]
+  skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
 
 requirements:
@@ -24,7 +24,7 @@ requirements:
     - python
     - black >=23.11.0
     - python-lsp-server >=1.4.0
-    - toml  # [py<311]
+    - tomli  # [py<311]
 
 test:
   imports:
@@ -33,7 +33,6 @@ test:
   requires:
     - pip
   commands:
-    - pip check || true    # [win]
     - pip check
 
 about:
